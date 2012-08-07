@@ -9,6 +9,9 @@ EMAIL_FILE = ''
 LOG_FILE = ''
 #needs to be set
 BAD_EMAILS = ''
+#needs to be set
+NUM_THREADS = 10
+
 def main():
     #Declarations
     #needs to be reset based on which OS the csv file was generated on...
@@ -17,7 +20,7 @@ def main():
     emailList = FH_EMAIL.read().split(separator)
     FH_EMAIL.close()
     #partition email list into two equal parts
-        email_groups = list(grouper((len(emailList) / 3) + 1, emailList))
+    email_groups = list(grouper((len(emailList) / NUM_THREADS) + 1, emailList))
 
     lock = threading.Lock()
     jobs = []
